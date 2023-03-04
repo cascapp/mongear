@@ -9,13 +9,16 @@
 MonGear is a light set of convenience functions for using Mongo
 in Go. 
 
+
+## Installation
+Use the standard `go get github.com/cascadiansw/mongear`
+
+## Functions
 In this version, the functions revolve entirely around creation
-of bson documents for filters and aggregation pipelines, using 
+of bson documents for filters and aggregation pipelines, using
 plain 'ol strings instead of ugly looking bson documents.
 
-The are as follows.
-
-## Query
+### Query
 
 Given a valid Mongo query/filter string, this returns a bson.D
 document that can be directly fed to any Mongo Find*, Update, Replace, Delete
@@ -64,7 +67,7 @@ query, _ := mongear.Query(`{
 }`)
 ```
 
-## Pipeline
+### Pipeline
 
 Given a valid Mongo aggregation pipeline string, this returns a bson.D
 document that can be directly fed to Mongo's Aggregation
@@ -86,7 +89,7 @@ pipeline, _ := mongear.Pipeline(fmt.Sprintf(`[
 cursor, _ := collection.Aggregate(context.TODO(), pipeline, nil)
 ```
 
-## Stage
+### Stage
 
 Sometimes it's useful to be able to build an aggregation pipeline one
 stage at a time.  For this case, you can use the `Stage()` function.
