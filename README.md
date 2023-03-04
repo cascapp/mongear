@@ -98,8 +98,9 @@ Sometimes it's useful to be able to build an aggregation pipeline one
 stage at a time.  For this case, you can use the `Stage()` function.
 
 Given a valid Mongo aggregation pipeline string, this returns a bson.D
-document that can be directly fed to Mongo's Aggregation
-function.  For example:
+document that can be added to the aggregation pipeline.
+
+For example:
 
 ```go
 keys := ["Hello", "World"]
