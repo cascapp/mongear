@@ -1,5 +1,11 @@
 # MonGear
 
+
+[![tag](https://img.shields.io/github/tag/cascadiansw/mongear.svg)](https://github.com/samber/lo/releases)
+![Go Version](https://img.shields.io/badge/Go-%3E%3D%201.20-%23007d9c)
+[![Contributors](https://img.shields.io/github/contributors/cascadiansw/mongear)](https://github.com/samber/lo/graphs/contributors)
+[![License](https://img.shields.io/github/license/cascadiansw/mongear)](./LICENSE)
+
 MonGear is a light set of convenience functions for using Mongo
 in Go. 
 
