@@ -7,9 +7,9 @@ import (
 	"strings"
 )
 
-// NewFilter returns a Mongo filter document (bson.D) from a given
+// Query returns a Mongo filter document (bson.D) from a given
 // correctly formatted filter string.
-func NewFilter(str string) (bson.D, error) {
+func Query(str string) (bson.D, error) {
 	str = strings.TrimSpace(str)
 	if strings.Index(str, "{") == 0 {
 		var filter bson.D
@@ -23,7 +23,7 @@ func NewFilter(str string) (bson.D, error) {
 	}
 }
 
-// NewStage returns a Mongo aggregation pipeline stage document(bsond.D) from a
+// Stage returns a Mongo aggregation pipeline stage document(bsond.D) from a
 // correctly formatted aggregation stage string.  These can be appended to an
 // existing mongo.Pipeline and the whole pipeline passed to the collection's
 // aggregate function.
@@ -34,28 +34,26 @@ func NewFilter(str string) (bson.D, error) {
 // In both cases, the pipeline and the newly created stage are returned.
 //
 // This is function is useful for building aggreation pipelines a stage at a time
-func NewStage(p mongo.Pipeline, str string) (mongo.Pipeline, bson.D, error) {
-	stage, err := NewFilter(str)
+func Stage(p mongo.Pipeline, str string) (mongo.Pipeline, bson.D, error) {
+	stage, err := Query(str)
 	if err == nil && p != nil {
 		p = append(p, stage)
 	}
 	return p, stage, err
 }
 
-// NewAggregate returns a Mongo aggregation pipeline ([]bsond.D) from a
+// Pipeline returns a Mongo aggregation pipeline ([]bsond.D) from a
 // correctly formatted aggregation string.
-func NewAggregate(str string) (mongo.Pipeline, error) {
-	var aggregation = []bson.D{}
+func Pipeline(str string) (mongo.Pipeline, error) {
+	var pipeline = mongo.Pipeline{}
 	str = strings.TrimSpace(str)
 	if strings.Index(str, "[") == 0 {
-		var aggregate bson.D
-		err := bson.UnmarshalExtJSON([]byte(str), false, &aggregate)
+		err := bson.UnmarshalExtJSON([]byte(str), false, &pipeline)
 		if err != nil {
 			return nil, err
 		}
-		aggregation = append(aggregation, aggregate)
 	} else {
-		return nil, errors.New("Not a valid aggregation string")
+		return nil, errors.New("Not a valid aggregate string")
 	}
-	return aggregation, nil
+	return pipeline, nil
 }
