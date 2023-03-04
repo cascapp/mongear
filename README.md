@@ -39,7 +39,7 @@ query, _ := mongear.Query(`{
         {
             "$or": [
                 {
-                    "user.id" : <id>
+                    "user.id" : avogadrosothernumber
                 },
                 {
                     "retweeted_status.user.id": "Yre72kda3901"
