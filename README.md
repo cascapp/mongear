@@ -30,6 +30,39 @@ query, _ := mongear.Query(fmt.Sprintf(`{
 
 cursor, _ := collection.Find(context.TODO(), query, nil)
 ```
+Now, admitedly that's not much of a win.  But when you get into something like this,
+it definitely is.
+
+```go
+query, _ := mongear.Query(`{
+    "$and": [
+        {
+            "$or": [
+                {
+                    "user.id" : <id>
+                },
+                {
+                    "retweeted_status.user.id": "Yre72kda3901"
+                }
+            ]
+        },
+        {
+            "$and": [
+                {
+                    "date_posted": {
+                        "$gt": somedate
+                    }
+                },
+                {
+                    "date_posted": {
+                        "$lt": somedate
+                    }
+                }
+            ]
+        }
+    ]
+}`)
+```
 
 ## Pipeline
 
