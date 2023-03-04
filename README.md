@@ -11,7 +11,10 @@ in Go.
 
 
 ## Installation
-Use the standard `go get github.com/cascadiansw/mongear`
+Use the standard 
+```shell
+go get github.com/cascadiansw/mongear
+```
 
 ## Functions
 In this version, the functions revolve entirely around creation
