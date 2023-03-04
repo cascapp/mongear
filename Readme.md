@@ -65,7 +65,7 @@ p, match, _ = mongear.Stage(p, fmt.Sprintf(`
     {"$match": { "key": {"$in": [%s]}}}`, 
 keys))
 
-p, lookup, _ = mongear.NewStage(p, `{
+p, lookup, _ = mongear.Stage(p, `{
     "$lookup": {
         "from": "Users",
         "localField": "key",
